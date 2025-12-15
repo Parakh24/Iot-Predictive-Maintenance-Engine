@@ -43,7 +43,7 @@ def create_rolling_features(df, windows=[3, 5]):
             df_feat[f'{col}_rolling_std_{window}'] = df_feat[col].shift(1).rolling(window=window).std()
             
     # Rolling features introduce NaNs at the beginning, we can fill them with the first valid value or drop.
-    # Forward fill then backward fill to handle initial NaNs
+    # Forward fill then backward fill to handle initial NaNs 
     df_feat.fillna(method='bfill', inplace=True)
     
     return df_feat
@@ -82,7 +82,23 @@ def main():
     
     print(f"Saving feature engineered data to {output_path}...")
     df.to_csv(output_path, index=False)
-    print("Feature engineering completed successfully.")
+    print("Feature engineering completed successfully.") 
 
-if __name__ == "__main__":
+# train test split for time stamp concept and not using random features 
+
+
+if __name__ == "__main__": 
     main()
+
+output_path = "data/processed/feature_engineered_data.csv"
+df = pd.read_csv(output_path)
+
+split_index = int(len(df) * 0.8) 
+
+train_df = df.iloc[:split_index] 
+test_df = df.iloc[split_index:] 
+
+train_df.to_csv("data/processed/train.csv" , index = False) 
+test_df.to_csv("data/processed/test.csv" , index = False) 
+
+print("Train test split completed successfully") 
