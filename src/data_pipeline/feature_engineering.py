@@ -32,13 +32,15 @@ def create_rolling_features(df, windows=[3, 5]):
     df_feat = df.copy()
     cols_to_roll = ['Air temperature [K]', 'Process temperature [K]', 
                     'Rotational speed [rpm]', 'Torque [Nm]']
-    
+                
     for window in windows:
         for col in cols_to_roll:
-            # Rolling Mean
-            df_feat[f'{col}_rolling_mean_{window}'] = df_feat[col].rolling(window=window).mean()
+            # Rolling Mean 
+            # added shift function to prevent data leakage 
+            df_feat[f'{col}_rolling_mean_{window}'] = df_feat[col].shift(1).rolling(window=window).mean()  
             # Rolling Std
-            df_feat[f'{col}_rolling_std_{window}'] = df_feat[col].rolling(window=window).std()
+            # added shift function to prevent data leakage 
+            df_feat[f'{col}_rolling_std_{window}'] = df_feat[col].shift(1).rolling(window=window).std()
             
     # Rolling features introduce NaNs at the beginning, we can fill them with the first valid value or drop.
     # Forward fill then backward fill to handle initial NaNs
