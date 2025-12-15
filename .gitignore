@@ -1,0 +1,10 @@
+
+# Data
+data/
+*.csv
+*.pkl
+
+# Env
+.env
+__pycache__/
+*.pyc
