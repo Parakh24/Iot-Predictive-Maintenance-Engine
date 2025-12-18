@@ -75,9 +75,9 @@ def main():
     print(f"SMOTE - Recall        : {recall_smote:.4f}")
     print(f"SMOTE - F1            : {f1_smote:.4f}")
 
-    # Save best-performing model (SMOTE usually better)
-    joblib.dump(smote_model, "models/imbalance_handled_model.joblib")
-    joblib.dump(scaler, "models/imbalance_scaler.joblib")
+    # Save best-performing model 
+    joblib.dump(smote_model, "src/models/imbalance_handled_model.joblib")
+    joblib.dump(scaler, "src/models/imbalance_scaler.joblib")
 
 if __name__ == "__main__":
     main()
