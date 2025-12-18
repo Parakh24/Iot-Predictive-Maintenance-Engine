@@ -60,8 +60,8 @@ def main():
     print(f"F1 Score  : {f1:.4f}")
 
     # Save model
-    joblib.dump(model, "models/baseline_model.joblib")
-    joblib.dump(scaler, "models/baseline_scaler.joblib")
+    joblib.dump(model, "src/models/baseline_model.joblib")
+    joblib.dump(scaler, "src/models/baseline_scaler.joblib")
 
 if __name__ == "__main__":
     main()
