@@ -1,0 +1,32 @@
+{
+  "model_name": "XGBoost",
+  "best_params": {
+    "subsample": 0.8,
+    "reg_lambda": 2,
+    "reg_alpha": 0.01,
+    "n_estimators": 500,
+    "min_child_weight": 1,
+    "max_depth": 8,
+    "learning_rate": 0.15,
+    "gamma": 0.2,
+    "colsample_bytree": 1.0
+  },
+  "best_cv_score": 0.9550478997789241,
+  "test_metrics": {
+    "accuracy": 0.9985,
+    "precision": 1.0,
+    "recall": 0.9230769230769231,
+    "f1": 0.96
+  },
+  "confusion_matrix": [
+    [
+      1961,
+      0
+    ],
+    [
+      3,
+      36
+    ]
+  ],
+  "timestamp": "20251219_094134"
+}
