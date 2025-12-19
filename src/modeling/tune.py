@@ -39,7 +39,7 @@ def main():
     X_test = scaler.transform(X_test)
 
     # -------------------------------
-    # 1️⃣ Baseline with class weights
+    #  Baseline with class weights
     # -------------------------------
     weighted_model = LogisticRegression(
         max_iter=1000,
