@@ -29,7 +29,9 @@ y_test = test["Machine failure"]
 # -------------------------------
 pipelines = {
     "Baseline": os.path.join(BASE_DIR, "models", "baseline_pipeline.joblib"),
-    "ImbalanceHandled": os.path.join(BASE_DIR, "models", "imbalance_pipeline.joblib")
+    "ImbalanceHandled": os.path.join(BASE_DIR, "models", "imbalance_pipeline.joblib"),
+    "RandomForest": os.path.join(BASE_DIR, "models", "randomforest_pipeline.joblib"),
+    "XGBoost": os.path.join(BASE_DIR, "models", "xgboost_pipeline.joblib")
 }
 
 results = []
@@ -41,6 +43,7 @@ for name, pipeline_path in pipelines.items():
     if not os.path.exists(pipeline_path):
         raise FileNotFoundError(f"Pipeline file not found: {pipeline_path}")
 
+    # Load pipeline (preprocessing + model)
     pipeline = joblib.load(pipeline_path)
 
     # Predict directly; pipeline handles preprocessing
@@ -63,7 +66,7 @@ for name, pipeline_path in pipelines.items():
     })
 
 # -------------------------------
-# Save results
+# Save comparison report
 # -------------------------------
 output_csv = os.path.join(RESULTS_DIR, "model_comparison.csv")
 pd.DataFrame(results).to_csv(output_csv, index=False)
