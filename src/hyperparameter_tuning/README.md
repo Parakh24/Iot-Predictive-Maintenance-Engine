@@ -90,6 +90,46 @@ python src/hyperparameter_tuning/optuna_optimizer.py
 
 ---
 
+## 🏆 Optimization Results
+
+### Best XGBoost Parameters (RandomizedSearchCV)
+
+| Parameter | Best Value |
+|-----------|------------|
+| n_estimators | 500 |
+| max_depth | 8 |
+| learning_rate | 0.15 |
+| subsample | 0.8 |
+| colsample_bytree | 0.7 |
+| gamma | 0.2 |
+| reg_alpha | 0.01 |
+| reg_lambda | 2 |
+| min_child_weight | 1 |
+
+### Model Performance Comparison
+
+| Model | CV Score | Accuracy | Precision | Recall | F1 Score |
+|-------|----------|----------|-----------|--------|----------|
+| **XGBoost** | 0.9550 | **0.9985** | 1.0000 | **0.9231** | **0.9600** |
+| Random Forest | 0.9363 | 0.9860 | 1.0000 | 0.8780 | 0.9351 |
+| Logistic Regression | 0.5870 | 0.9360 | 0.3036 | 0.8462 | 0.4468 |
+
+### Key Findings
+
+- **XGBoost achieved the best performance** with F1 Score of 0.96 and Recall of 0.92
+- **Time-series validation** ensured realistic performance estimation
+- **Class imbalance handling** using `scale_pos_weight` significantly improved recall
+- **Deeper trees (max_depth=8)** with more estimators (500) provided best results
+
+### Optuna Bayesian Optimization Results
+
+| Model | CV Score | Test F1 | Test Recall | Trials |
+|-------|----------|---------|-------------|--------|
+| XGBoost | 0.9231 | 0.8503 | 0.8974 | 50 |
+| Random Forest | 0.9231 | 0.8974 | 0.8974 | 50 |
+
+---
+
 ## ⚙️ Configuration
 
 Edit `config.py` to customize:
