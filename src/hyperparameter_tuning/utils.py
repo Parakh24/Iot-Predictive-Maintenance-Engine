@@ -142,7 +142,7 @@ def print_class_distribution(y: pd.Series, title: str = "Class Distribution"):
         Title for the output.
     """
     print(f"\n{'='*50}")
-    print(f"📊 {title}")
+    print(f" {title}")
     print(f"{'='*50}")
     
     counts = y.value_counts().sort_index()
@@ -152,6 +152,6 @@ def print_class_distribution(y: pd.Series, title: str = "Class Distribution"):
         pct = count / total * 100
         print(f"  Class {label}: {count:>6} samples ({pct:>5.1f}%)")
     
-    print(f"  {'─'*40}")
+    print(f"  {''*40}")
     print(f"  Total:   {total:>6} samples")
     print(f"  Imbalance Ratio: {get_class_weight_ratio(y):.2f}:1 (Neg:Pos)")

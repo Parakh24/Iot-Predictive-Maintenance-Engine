@@ -1,4 +1,4 @@
-# 🔧 Hyperparameter Tuning Module
+#  Hyperparameter Tuning Module
 
 **Week 2 Deliverable: Modeling & Hyperparameter Tuning**
 
@@ -6,41 +6,41 @@ This module provides comprehensive hyperparameter optimization for the IoT Predi
 
 ---
 
-## 📋 Week 2 Requirements Covered
+##  Week 2 Requirements Covered
 
 | Requirement | Implementation |
 |-------------|----------------|
-| ✅ RandomizedSearchCV for XGBoost | `hyperparameter_optimizer.py` |
-| ✅ Time-series split validation | Using `TimeSeriesSplit` |
-| ✅ Focus on Recall and F1 | Primary scoring metrics |
-| ✅ n_estimators tuning | Range: 100-500 |
-| ✅ max_depth tuning | Range: 3-10 |
-| ✅ learning_rate tuning | Range: 0.01-0.3 |
-| ✅ subsample tuning | Range: 0.5-1.0 |
-| ✅ colsample_bytree tuning | Range: 0.5-1.0 |
-| ✅ Class imbalance handling | Using `scale_pos_weight` and `class_weight='balanced'` |
+|  RandomizedSearchCV for XGBoost | `hyperparameter_optimizer.py` |
+|  Time-series split validation | Using `TimeSeriesSplit` |
+|  Focus on Recall and F1 | Primary scoring metrics |
+|  n_estimators tuning | Range: 100-500 |
+|  max_depth tuning | Range: 3-10 |
+|  learning_rate tuning | Range: 0.01-0.3 |
+|  subsample tuning | Range: 0.5-1.0 |
+|  colsample_bytree tuning | Range: 0.5-1.0 |
+|  Class imbalance handling | Using `scale_pos_weight` and `class_weight='balanced'` |
 
 ---
 
-## 📁 Module Structure
+##  Module Structure
 
 ```
 src/hyperparameter_tuning/
-├── __init__.py                    # Module initialization
-├── config.py                      # Configuration and search spaces
-├── utils.py                       # Utility functions
-├── hyperparameter_optimizer.py    # Main optimizer (RandomizedSearchCV)
-├── optuna_optimizer.py            # Advanced optimizer (Bayesian)
-├── run_optimization.py            # Main execution script
-├── README.md                      # This documentation
-├── results/                       # Optimization results (auto-created)
-│   └── optuna/                    # Optuna-specific results
-└── optimized_models/              # Saved models (auto-created)
+ __init__.py                    # Module initialization
+ config.py                      # Configuration and search spaces
+ utils.py                       # Utility functions
+ hyperparameter_optimizer.py    # Main optimizer (RandomizedSearchCV)
+ optuna_optimizer.py            # Advanced optimizer (Bayesian)
+ run_optimization.py            # Main execution script
+ README.md                      # This documentation
+ results/                       # Optimization results (auto-created)
+    optuna/                    # Optuna-specific results
+ optimized_models/              # Saved models (auto-created)
 ```
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Option 1: Full Optimization (All Models)
 
@@ -69,7 +69,7 @@ python src/hyperparameter_tuning/optuna_optimizer.py
 
 ---
 
-## 📊 Models Optimized
+##  Models Optimized
 
 ### 1. Logistic Regression (Baseline)
 - **Purpose**: Benchmark performance
@@ -90,7 +90,7 @@ python src/hyperparameter_tuning/optuna_optimizer.py
 
 ---
 
-## 🏆 Optimization Results
+##  Optimization Results
 
 ### Best XGBoost Parameters (RandomizedSearchCV)
 
@@ -130,7 +130,7 @@ python src/hyperparameter_tuning/optuna_optimizer.py
 
 ---
 
-## ⚙️ Configuration
+##  Configuration
 
 Edit `config.py` to customize:
 
@@ -145,7 +145,7 @@ OPTIMIZATION_CONFIG = {
 
 ---
 
-## 📈 Outputs
+##  Outputs
 
 ### Results Directory (`src/hyperparameter_tuning/results/`)
 - `model_comparison.csv` - Side-by-side comparison of all models
@@ -161,7 +161,7 @@ OPTIMIZATION_CONFIG = {
 
 ---
 
-## 🔬 Optimization Methods
+##  Optimization Methods
 
 ### RandomizedSearchCV (Standard)
 - Randomly samples from parameter distributions
@@ -176,7 +176,7 @@ OPTIMIZATION_CONFIG = {
 
 ---
 
-## 📝 Usage Examples
+##  Usage Examples
 
 ### Programmatic Usage
 
@@ -223,7 +223,7 @@ result = optimizer.optimize_xgboost(param_grid=custom_grid, n_iter=30)
 
 ---
 
-## 📦 Dependencies
+##  Dependencies
 
 ```
 scikit-learn>=1.0.0
@@ -242,7 +242,7 @@ pip install scikit-learn xgboost pandas numpy joblib imbalanced-learn optuna
 
 ---
 
-## 🎯 Week 2 Deliverable Checklist
+##  Week 2 Deliverable Checklist
 
 - [x] Hyperparameter optimization module created
 - [x] RandomizedSearchCV implemented for XGBoost
@@ -256,7 +256,7 @@ pip install scikit-learn xgboost pandas numpy joblib imbalanced-learn optuna
 
 ---
 
-## 👥 Team Integration
+##  Team Integration
 
 This module is designed to work seamlessly with other Week 2 components:
 - Uses data from `data/processed/feature_engineered_data.csv`
@@ -266,6 +266,6 @@ This module is designed to work seamlessly with other Week 2 components:
 
 ---
 
-## 📧 Contact
+##  Contact
 
 For questions about this module, contact the Hyperparameter Optimization team member.

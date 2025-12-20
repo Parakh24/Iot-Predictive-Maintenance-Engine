@@ -2,7 +2,7 @@
 Hyperparameter Optimizer for XGBoost, Random Forest, and Logistic Regression
 
 Uses RandomizedSearchCV with TimeSeriesSplit for proper time-series validation.
-Focuses on Recall and F1 metrics as per Week 2 requirements.
+Focuses on Recall and F1 metrics for imbalanced classification.
 """
 
 import os
@@ -31,17 +31,16 @@ from .utils import (
 
 class HyperparameterOptimizer:
     """
-    Comprehensive Hyperparameter Optimization for Predictive Maintenance Models.
+    Hyperparameter optimization for predictive maintenance models.
     
     Implements RandomizedSearchCV with TimeSeriesSplit for:
     - XGBoost Classifier
     - Random Forest Classifier  
     - Logistic Regression (Baseline)
     
-    Focuses on Recall and F1 metrics for imbalanced failure prediction.
+    Optimizes for Recall and F1 metrics on imbalanced data.
     """
     
-    # Default hyperparameter search spaces
     XGBOOST_PARAM_GRID = {
         'n_estimators': [100, 200, 300, 400, 500],
         'max_depth': [3, 4, 5, 6, 7, 8, 10],
@@ -144,17 +143,17 @@ class HyperparameterOptimizer:
             Proportion of data to use for testing.
         """
         print("\n" + "="*60)
-        print("📂 LOADING AND PREPARING DATA")
+        print(" LOADING AND PREPARING DATA")
         print("="*60)
         
         # Load data
         df = load_data(self.data_path)
-        print(f"✅ Loaded data from: {self.data_path}")
+        print(f" Loaded data from: {self.data_path}")
         print(f"   Shape: {df.shape}")
         
         # Prepare features
         self.X, self.y, self.feature_names = prepare_features(df)
-        print(f"✅ Prepared {len(self.feature_names)} features")
+        print(f" Prepared {len(self.feature_names)} features")
         
         # Print class distribution
         print_class_distribution(self.y, "Target Class Distribution")
@@ -166,7 +165,7 @@ class HyperparameterOptimizer:
         self.y_train = self.y.iloc[:split_idx]
         self.y_test = self.y.iloc[split_idx:]
         
-        print(f"\n📊 Time-Series Split:")
+        print(f"\n Time-Series Split:")
         print(f"   Train: {len(self.X_train)} samples")
         print(f"   Test:  {len(self.X_test)} samples")
         
@@ -177,7 +176,7 @@ class HyperparameterOptimizer:
         self.X_train_scaled = X_train_scaled
         self.X_test_scaled = X_test_scaled
         
-        print("✅ Features scaled using StandardScaler")
+        print(" Features scaled using StandardScaler")
         
     def _get_cv_strategy(self):
         """Get the cross-validation strategy (TimeSeriesSplit)."""
@@ -214,7 +213,7 @@ class HyperparameterOptimizer:
             Dictionary containing best parameters, scores, and model.
         """
         print("\n" + "="*60)
-        print("🚀 OPTIMIZING XGBOOST CLASSIFIER")
+        print(" OPTIMIZING XGBOOST CLASSIFIER")
         print("="*60)
         
         param_grid = param_grid or self.XGBOOST_PARAM_GRID
@@ -222,7 +221,7 @@ class HyperparameterOptimizer:
         
         # Calculate class weight for imbalance handling
         scale_pos_weight = get_class_weight_ratio(self.y_train)
-        print(f"📊 Scale Pos Weight (for imbalance): {scale_pos_weight:.2f}")
+        print(f" Scale Pos Weight (for imbalance): {scale_pos_weight:.2f}")
         
         # Base model with imbalance handling
         base_model = XGBClassifier(
@@ -245,7 +244,7 @@ class HyperparameterOptimizer:
             return_train_score=True
         )
         
-        print(f"\n🔍 Starting RandomizedSearchCV...")
+        print(f"\n Starting RandomizedSearchCV...")
         print(f"   Iterations: {n_iter}")
         print(f"   CV Splits: {self.n_cv_splits}")
         print(f"   Scoring: {self.scoring}")
@@ -277,7 +276,7 @@ class HyperparameterOptimizer:
             Dictionary containing best parameters, scores, and model.
         """
         print("\n" + "="*60)
-        print("🌲 OPTIMIZING RANDOM FOREST CLASSIFIER")
+        print(" OPTIMIZING RANDOM FOREST CLASSIFIER")
         print("="*60)
         
         param_grid = param_grid or self.RANDOM_FOREST_PARAM_GRID
@@ -301,7 +300,7 @@ class HyperparameterOptimizer:
             return_train_score=True
         )
         
-        print(f"\n🔍 Starting RandomizedSearchCV...")
+        print(f"\n Starting RandomizedSearchCV...")
         print(f"   Iterations: {n_iter}")
         print(f"   CV Splits: {self.n_cv_splits}")
         print(f"   Scoring: {self.scoring}")
@@ -332,7 +331,7 @@ class HyperparameterOptimizer:
             Dictionary containing best parameters, scores, and model.
         """
         print("\n" + "="*60)
-        print("📈 OPTIMIZING LOGISTIC REGRESSION (BASELINE)")
+        print(" OPTIMIZING LOGISTIC REGRESSION (BASELINE)")
         print("="*60)
         
         param_grid = param_grid or self.LOGISTIC_PARAM_GRID
@@ -355,7 +354,7 @@ class HyperparameterOptimizer:
             return_train_score=True
         )
         
-        print(f"\n🔍 Starting RandomizedSearchCV...")
+        print(f"\n Starting RandomizedSearchCV...")
         print(f"   Iterations: {n_iter}")
         print(f"   CV Splits: {self.n_cv_splits}")
         print(f"   Scoring: {self.scoring}")
@@ -426,22 +425,22 @@ class HyperparameterOptimizer:
     
     def _print_results(self, model_name: str, result: Dict[str, Any]):
         """Print formatted results for a model."""
-        print(f"\n{'─'*50}")
-        print(f"✅ {model_name} OPTIMIZATION COMPLETE")
-        print(f"{'─'*50}")
+        print(f"\n{''*50}")
+        print(f" {model_name} OPTIMIZATION COMPLETE")
+        print(f"{''*50}")
         
-        print("\n📋 Best Parameters:")
+        print("\n Best Parameters:")
         for param, value in result['best_params'].items():
             print(f"   {param}: {value}")
         
-        print(f"\n📊 Cross-Validation Score ({self.scoring}):")
+        print(f"\n Cross-Validation Score ({self.scoring}):")
         print(f"   CV Score: {result['best_cv_score']:.4f}")
         
-        print("\n🎯 Test Set Performance:")
+        print("\n Test Set Performance:")
         for metric, value in result['test_metrics'].items():
             print(f"   {metric.capitalize()}: {value:.4f}")
         
-        print("\n📉 Confusion Matrix:")
+        print("\n Confusion Matrix:")
         cm = result['confusion_matrix']
         print(f"   TN: {cm[0][0]:>5}  |  FP: {cm[0][1]:>5}")
         print(f"   FN: {cm[1][0]:>5}  |  TP: {cm[1][1]:>5}")
@@ -456,7 +455,7 @@ class HyperparameterOptimizer:
             Results for all models and comparison report.
         """
         print("\n" + "="*70)
-        print("🎯 STARTING FULL HYPERPARAMETER OPTIMIZATION PIPELINE")
+        print(" STARTING FULL HYPERPARAMETER OPTIMIZATION PIPELINE")
         print("="*70)
         print(f"   Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         
@@ -490,7 +489,7 @@ class HyperparameterOptimizer:
             Comparison dataframe sorted by F1 score.
         """
         print("\n" + "="*60)
-        print("📊 MODEL COMPARISON REPORT")
+        print(" MODEL COMPARISON REPORT")
         print("="*60)
         
         comparison_data = []
@@ -512,14 +511,14 @@ class HyperparameterOptimizer:
         
         # Find best model
         best = comparison_df.iloc[0]
-        print(f"\n🏆 BEST MODEL: {best['Model']}")
+        print(f"\n BEST MODEL: {best['Model']}")
         print(f"   F1 Score: {best['F1_Score']:.4f}")
         print(f"   Recall:   {best['Recall']:.4f}")
         
         # Save comparison
         comparison_path = os.path.join(self.output_dir, 'model_comparison.csv')
         comparison_df.to_csv(comparison_path, index=False)
-        print(f"\n📁 Comparison saved to: {comparison_path}")
+        print(f"\n Comparison saved to: {comparison_path}")
         
         return comparison_df
     
@@ -546,7 +545,7 @@ class HyperparameterOptimizer:
             with open(filepath, 'w') as f:
                 json.dump(result_to_save, f, indent=2)
             
-            print(f"📁 Saved: {filepath}")
+            print(f" Saved: {filepath}")
         
         # Save summary of all results
         summary = {
@@ -569,7 +568,7 @@ class HyperparameterOptimizer:
         with open(summary_path, 'w') as f:
             json.dump(summary, f, indent=2)
         
-        print(f"📁 Saved: {summary_path}")
+        print(f" Saved: {summary_path}")
     
     def save_models(self):
         """Save all optimized models and the scaler."""
@@ -580,18 +579,18 @@ class HyperparameterOptimizer:
             filename = f"{model_name.lower()}_optimized_{timestamp}.joblib"
             filepath = os.path.join(self.models_dir, filename)
             joblib.dump(model, filepath)
-            print(f"📁 Saved model: {filepath}")
+            print(f" Saved model: {filepath}")
         
         # Save scaler
         scaler_path = os.path.join(self.models_dir, f'scaler_{timestamp}.joblib')
         joblib.dump(self.scaler, scaler_path)
-        print(f"📁 Saved scaler: {scaler_path}")
+        print(f" Saved scaler: {scaler_path}")
         
         # Save feature names
         features_path = os.path.join(self.models_dir, f'feature_names_{timestamp}.json')
         with open(features_path, 'w') as f:
             json.dump(self.feature_names, f, indent=2)
-        print(f"📁 Saved feature names: {features_path}")
+        print(f" Saved feature names: {features_path}")
     
     def get_best_params(self, model_name: str) -> Dict[str, Any]:
         """
