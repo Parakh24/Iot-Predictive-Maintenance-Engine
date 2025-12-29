@@ -5,9 +5,9 @@ This file contains all configurable parameters for the hyperparameter optimizati
 Modify these values to customize the optimization behavior.
 """
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # DATA CONFIGURATION
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 DATA_CONFIG = {
     "data_path": "data/processed/feature_engineered_data.csv",
@@ -15,9 +15,9 @@ DATA_CONFIG = {
     "test_size": 0.2,
 }
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # OPTIMIZATION CONFIGURATION
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 OPTIMIZATION_CONFIG = {
     # Cross-validation settings
@@ -43,9 +43,9 @@ OPTIMIZATION_CONFIG = {
     "verbose": 1,                   # Verbosity level (0, 1, or 2)
 }
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # OUTPUT PATHS
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 OUTPUT_CONFIG = {
     "results_dir": "src/hyperparameter_tuning/results",
@@ -53,10 +53,10 @@ OUTPUT_CONFIG = {
     "optuna_results_dir": "src/hyperparameter_tuning/results/optuna",
 }
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # XGBOOST HYPERPARAMETER SEARCH SPACE
 # (Week 2 Focus: n_estimators, max_depth, learning_rate, subsample, colsample_bytree)
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 XGBOOST_PARAM_GRID = {
     # Number of boosting rounds
@@ -87,9 +87,9 @@ XGBOOST_PARAM_GRID = {
     "reg_lambda": [1, 1.5, 2, 5],
 }
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # RANDOM FOREST HYPERPARAMETER SEARCH SPACE
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 RANDOM_FOREST_PARAM_GRID = {
     # Number of trees in the forest
@@ -111,9 +111,9 @@ RANDOM_FOREST_PARAM_GRID = {
     "bootstrap": [True, False],
 }
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # LOGISTIC REGRESSION HYPERPARAMETER SEARCH SPACE (BASELINE)
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 LOGISTIC_PARAM_GRID = {
     # Inverse of regularization strength
@@ -129,9 +129,9 @@ LOGISTIC_PARAM_GRID = {
     "max_iter": [1000, 2000],
 }
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 # OPTUNA-SPECIFIC SEARCH RANGES (Continuous parameters for Bayesian optimization)
-# ═══════════════════════════════════════════════════════════════════════════════
+# 
 
 OPTUNA_XGBOOST_RANGES = {
     "n_estimators": {"low": 100, "high": 500, "type": "int"},

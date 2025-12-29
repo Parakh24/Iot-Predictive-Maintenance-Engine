@@ -27,10 +27,10 @@ def main():
     """Run the full hyperparameter optimization pipeline."""
     
     print("""
-    ╔══════════════════════════════════════════════════════════════════╗
-    ║       🔧 IoT PREDICTIVE MAINTENANCE - HYPERPARAMETER TUNING      ║
-    ║                        Week 2 Deliverable                         ║
-    ╚══════════════════════════════════════════════════════════════════╝
+    
+            IoT PREDICTIVE MAINTENANCE - HYPERPARAMETER TUNING      
+                            Week 2 Deliverable                         
+    
     """)
     
     # Initialize optimizer with configuration
@@ -50,12 +50,12 @@ def main():
     results = optimizer.run_full_optimization()
     
     print("""
-    ╔══════════════════════════════════════════════════════════════════╗
-    ║                    ✅ OPTIMIZATION COMPLETE                       ║
-    ║                                                                  ║
-    ║   Results saved to:  src/hyperparameter_tuning/results/          ║
-    ║   Models saved to:   src/hyperparameter_tuning/optimized_models/ ║
-    ╚══════════════════════════════════════════════════════════════════╝
+    
+                         OPTIMIZATION COMPLETE                       
+                                                                      
+       Results saved to:  src/hyperparameter_tuning/results/          
+       Models saved to:   src/hyperparameter_tuning/optimized_models/ 
+    
     """)
     
     return results
@@ -65,9 +65,9 @@ def run_quick_optimization():
     """Run a quick optimization with fewer iterations (for testing)."""
     
     print("""
-    ╔══════════════════════════════════════════════════════════════════╗
-    ║       🚀 QUICK HYPERPARAMETER OPTIMIZATION (Testing Mode)        ║
-    ╚══════════════════════════════════════════════════════════════════╝
+    
+            QUICK HYPERPARAMETER OPTIMIZATION (Testing Mode)        
+    
     """)
     
     optimizer = HyperparameterOptimizer(
@@ -90,10 +90,10 @@ def run_xgboost_only():
     """Optimize only XGBoost (main focus as per Week 2 requirements)."""
     
     print("""
-    ╔══════════════════════════════════════════════════════════════════╗
-    ║              🚀 XGBOOST HYPERPARAMETER OPTIMIZATION              ║
-    ║              (Primary Model - Week 2 Focus)                      ║
-    ╚══════════════════════════════════════════════════════════════════╝
+    
+                   XGBOOST HYPERPARAMETER OPTIMIZATION              
+                  (Primary Model - Week 2 Focus)                      
+    
     """)
     
     optimizer = HyperparameterOptimizer(

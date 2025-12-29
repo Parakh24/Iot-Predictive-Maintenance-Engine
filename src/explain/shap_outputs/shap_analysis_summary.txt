@@ -1,0 +1,32 @@
+SHAP ANALYSIS SUMMARY
+============================================================
+
+Data path: D:\IOT_Project\data\processed\feature_engineered_data.csv
+Sample size: 500
+Number of features: 31
+
+TOP 10 MOST IMPORTANT FEATURES:
+----------------------------------------
+1. Rotational_speed__rpm_: 1.262421
+2. PWF: 1.160559
+3. TWF: 0.917882
+4. HDF: 0.846551
+5. Power__W_: 0.722184
+6. OSF: 0.697507
+7. Torque__Nm_: 0.691476
+8. Tool_wear__min_: 0.640997
+9. Wear_Torque_Interaction: 0.606379
+10. UDI: 0.424177
+
+============================================================
+Generated Outputs:
+- shap_summary_plot.png
+- shap_bar_plot.png
+- shap_force_plot_instance_0.png
+- shap_decision_plot.png
+- shap_waterfall_plot_instance_0.png
+- feature_importance.csv
+- shap_values.joblib
+- xgboost_model.joblib
+- scaler.joblib
+- feature_names.json
