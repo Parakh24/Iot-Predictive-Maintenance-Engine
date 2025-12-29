@@ -26,7 +26,11 @@ try:
 except ImportError:
     OPTUNA_AVAILABLE = False
 <<<<<<< HEAD
+<<<<<<< HEAD
     print("Optuna not installed. Install with: pip install optuna")
+=======
+    print(" Optuna not installed. Install with: pip install optuna")
+>>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
 =======
     print(" Optuna not installed. Install with: pip install optuna")
 >>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
@@ -124,7 +128,11 @@ class OptunaOptimizer:
         """Load and prepare data with time-based split."""
         print("\n" + "="*60)
 <<<<<<< HEAD
+<<<<<<< HEAD
         print("LOADING AND PREPARING DATA FOR OPTUNA OPTIMIZATION")
+=======
+        print(" LOADING AND PREPARING DATA FOR OPTUNA OPTIMIZATION")
+>>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
 =======
         print(" LOADING AND PREPARING DATA FOR OPTUNA OPTIMIZATION")
 >>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
@@ -147,7 +155,11 @@ class OptunaOptimizer:
         self.scale_pos_weight = get_class_weight_ratio(self.y_train)
         
 <<<<<<< HEAD
+<<<<<<< HEAD
         print(f"Data loaded. Train: {len(self.y_train)}, Test: {len(self.y_test)}")
+=======
+        print(f" Data loaded. Train: {len(self.y_train)}, Test: {len(self.y_test)}")
+>>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
 =======
         print(f" Data loaded. Train: {len(self.y_train)}, Test: {len(self.y_test)}")
 >>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
@@ -228,7 +240,11 @@ class OptunaOptimizer:
         """
         print("\n" + "="*60)
 <<<<<<< HEAD
+<<<<<<< HEAD
         print("OPTUNA XGBOOST OPTIMIZATION (Bayesian)")
+=======
+        print(" OPTUNA XGBOOST OPTIMIZATION (Bayesian)")
+>>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
 =======
         print(" OPTUNA XGBOOST OPTIMIZATION (Bayesian)")
 >>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
@@ -281,10 +297,17 @@ class OptunaOptimizer:
         self.results['XGBoost'] = result
         
 <<<<<<< HEAD
+<<<<<<< HEAD
         print(f"\nBest {self.scoring}: {study.best_value:.4f}")
         print(f"   Test F1: {result['test_f1']:.4f}")
         print(f"   Test Recall: {result['test_recall']:.4f}")
         print(f"\nBest Parameters:")
+=======
+        print(f"\n Best {self.scoring}: {study.best_value:.4f}")
+        print(f"   Test F1: {result['test_f1']:.4f}")
+        print(f"   Test Recall: {result['test_recall']:.4f}")
+        print(f"\n Best Parameters:")
+>>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
 =======
         print(f"\n Best {self.scoring}: {study.best_value:.4f}")
         print(f"   Test F1: {result['test_f1']:.4f}")
@@ -307,7 +330,11 @@ class OptunaOptimizer:
         """
         print("\n" + "="*60)
 <<<<<<< HEAD
+<<<<<<< HEAD
         print("OPTUNA RANDOM FOREST OPTIMIZATION (Bayesian)")
+=======
+        print(" OPTUNA RANDOM FOREST OPTIMIZATION (Bayesian)")
+>>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
 =======
         print(" OPTUNA RANDOM FOREST OPTIMIZATION (Bayesian)")
 >>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
@@ -355,7 +382,11 @@ class OptunaOptimizer:
         self.results['RandomForest'] = result
         
 <<<<<<< HEAD
+<<<<<<< HEAD
         print(f"\nBest {self.scoring}: {study.best_value:.4f}")
+=======
+        print(f"\n Best {self.scoring}: {study.best_value:.4f}")
+>>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
 =======
         print(f"\n Best {self.scoring}: {study.best_value:.4f}")
 >>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
@@ -368,15 +399,21 @@ class OptunaOptimizer:
         """Run full Optuna optimization for all models."""
         print("""
 <<<<<<< HEAD
+<<<<<<< HEAD
         ╔══════════════════════════════════════════════════════════════════╗
         ║             OPTUNA HYPERPARAMETER OPTIMIZATION                   ║
         ║              (Advanced Bayesian Optimization)                    ║
         ╚══════════════════════════════════════════════════════════════════╝
 =======
+=======
+>>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
         
                    OPTUNA HYPERPARAMETER OPTIMIZATION                   
                       (Advanced Bayesian Optimization)                    
         
+<<<<<<< HEAD
+>>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
+=======
 >>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
         """)
         
@@ -397,7 +434,11 @@ class OptunaOptimizer:
         """Generate and print comparison of models."""
         print("\n" + "="*60)
 <<<<<<< HEAD
+<<<<<<< HEAD
         print("OPTUNA OPTIMIZATION COMPARISON")
+=======
+        print(" OPTUNA OPTIMIZATION COMPARISON")
+>>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
 =======
         print(" OPTUNA OPTIMIZATION COMPARISON")
 >>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
@@ -439,7 +480,11 @@ class OptunaOptimizer:
             with open(filepath, 'w') as f:
                 json.dump(result_to_save, f, indent=2)
 <<<<<<< HEAD
+<<<<<<< HEAD
             print(f"Saved: {filepath}")
+=======
+            print(f" Saved: {filepath}")
+>>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
 =======
             print(f" Saved: {filepath}")
 >>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
@@ -452,7 +497,11 @@ class OptunaOptimizer:
             filepath = os.path.join(self.models_dir, f'{name.lower()}_optuna_{timestamp}.joblib')
             joblib.dump(model, filepath)
 <<<<<<< HEAD
+<<<<<<< HEAD
             print(f"Saved model: {filepath}")
+=======
+            print(f" Saved model: {filepath}")
+>>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
 =======
             print(f" Saved model: {filepath}")
 >>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
@@ -461,7 +510,11 @@ class OptunaOptimizer:
         scaler_path = os.path.join(self.models_dir, f'scaler_optuna_{timestamp}.joblib')
         joblib.dump(self.scaler, scaler_path)
 <<<<<<< HEAD
+<<<<<<< HEAD
         print(f"Saved scaler: {scaler_path}")
+=======
+        print(f" Saved scaler: {scaler_path}")
+>>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
 =======
         print(f" Saved scaler: {scaler_path}")
 >>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
@@ -477,7 +530,11 @@ class OptunaOptimizer:
         """
         if model_name not in self.studies:
 <<<<<<< HEAD
+<<<<<<< HEAD
             print(f"No study found for {model_name}")
+=======
+            print(f" No study found for {model_name}")
+>>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
 =======
             print(f" No study found for {model_name}")
 >>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
@@ -502,10 +559,17 @@ class OptunaOptimizer:
             fig2.write_html(os.path.join(self.output_dir, f'{model_name.lower()}_importance.html'))
             
 <<<<<<< HEAD
+<<<<<<< HEAD
             print(f"Visualizations saved to {self.output_dir}")
             
         except Exception as e:
             print(f"Could not create visualizations: {e}")
+=======
+            print(f" Visualizations saved to {self.output_dir}")
+            
+        except Exception as e:
+            print(f" Could not create visualizations: {e}")
+>>>>>>> f937fc8811973a3d798f4e0961cf56b902769470
 =======
             print(f" Visualizations saved to {self.output_dir}")
             
