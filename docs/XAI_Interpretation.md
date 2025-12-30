@@ -17,7 +17,7 @@ This document explains the predictions of the XGBoost predictive maintenance mod
 ---
 
 ## 3. SHAP Summary Plot
-![SHAP Summary](../explain/shap_outputs/shap_summary_plot.png)
+![SHAP Summary](../src/explain/shap_outputs/shap_summary_plot.png)
 
 **Interpretation:**
 - Temperature and vibration are the most important features.  
@@ -29,7 +29,7 @@ This document explains the predictions of the XGBoost predictive maintenance mod
 ---
 
 ## 4. SHAP Bar Plot
-![SHAP Bar Plot](../explain/shap_outputs/shap_bar_plot.png)
+![SHAP Bar Plot](../src/explain/shap_outputs/shap_bar_plot.png)
 
 **Interpretation:**
 - Shows the **overall average impact** of each feature on model output.  
@@ -39,7 +39,7 @@ This document explains the predictions of the XGBoost predictive maintenance mod
 ---
 
 ## 5. SHAP Force Plot
-![SHAP Force Plot](../explain/shap_outputs/shap_force_plot_instance_0.png)
+![SHAP Force Plot](../src/explain/shap_outputs/shap_force_plot_instance_0.png)
 
 **Interpretation:**
 - Force plot visualizes contributions for a single instance.  
@@ -50,7 +50,7 @@ This document explains the predictions of the XGBoost predictive maintenance mod
 ---
 
 ## 6. SHAP Decision Plot
-![SHAP Decision Plot](../explain/shap_outputs/shap_decision_plot.png)
+![SHAP Decision Plot](../src/explain/shap_outputs/shap_decision_plot.png)
 
 **Interpretation:**
 - Decision plot shows **how features cumulatively affect prediction**.  
@@ -60,7 +60,7 @@ This document explains the predictions of the XGBoost predictive maintenance mod
 ---
 
 ## 7. SHAP Waterfall Plot
-![SHAP Waterfall](../explain/shap_outputs/shap_waterfall_plot_instance_0.png)
+![SHAP Waterfall](../src/explain/shap_outputs/shap_waterfall_plot_instance_0.png)
 
 **Interpretation:**
 - Waterfall plot explains **individual prediction step by step**.  
