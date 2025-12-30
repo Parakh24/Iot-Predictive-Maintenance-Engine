@@ -6,8 +6,6 @@
 | Temperature | High → increases failure risk | Critical driver; monitor above 50°C |
 | Vibration   | High → increases failure risk | Strong positive influence on failure |
 | Pressure    | Low → increases failure risk  | Inversely related; low values increase risk |
-| Voltage     | High → slight increase risk   | Minor effect, keep within normal range |
-| Humidity    | Minimal effect                | Not significant for predictions    |
 
 ---
 
