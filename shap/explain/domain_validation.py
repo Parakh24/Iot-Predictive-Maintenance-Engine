@@ -2,34 +2,72 @@ import numpy as np
 import pandas as pd
 import shap
 from scipy.stats import spearmanr
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
 
-# -------------------------------
-# Inputs
-# -------------------------------
-# model : trained ML model
-# X     : pandas DataFrame with columns:
-#        ['Temperature', 'Vibration', 'Pressure_stability']
+# -------------------------------------------------
+# 1. Load dataset
+# -------------------------------------------------
+df = pd.read_csv("data/processed/feature_engineered_data.csv")
 
-# -------------------------------
-# Compute SHAP values
-# -------------------------------
-explainer = shap.Explainer(model, X)
-shap_values = explainer(X).values
+# -------------------------------------------------
+# 2. Define target and drop non-feature columns
+# -------------------------------------------------
+TARGET_COL = "Machine failure"
 
-# -------------------------------
-# Domain validation logic
-# -------------------------------
+DROP_COLS = [
+    "UDI",
+    "Product ID",
+    "Type",
+    "Machine failure",
+    "TWF", "HDF", "PWF", "OSF", "RNF"
+]
+
+y = df[TARGET_COL]
+X = df.drop(columns=DROP_COLS)
+
+# -------------------------------------------------
+# 3. Train model
+# -------------------------------------------------
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
+
+model = RandomForestClassifier(
+    n_estimators=200,
+    max_depth=10,
+    random_state=42,
+    class_weight="balanced"
+)
+model.fit(X_train, y_train)
+
+# -------------------------------------------------
+# 4. Compute SHAP values
+# -------------------------------------------------
+explainer = shap.Explainer(model, X_train)
+shap_values = explainer(X_test, check_additivity=False).values
+
+# -------------------------------------------------
+# 5. Domain validation (manufacturing logic)
+# -------------------------------------------------
 domain_expectations = {
-    "Temperature": "positive",
-    "Vibration": "positive",
-    "Pressure_stability": "negative"
+    "Air temperature [K]": "positive",
+    "Process temperature [K]": "positive",
+    "Torque [Nm]": "positive",
+    "Tool wear [min]": "positive"
 }
 
 print("\nDOMAIN VALIDATION REPORT")
-print("-" * 40)
+print("-" * 55)
 
 for feature, expected in domain_expectations.items():
-    corr, _ = spearmanr(X[feature], shap_values[:, X.columns.get_loc(feature)])
+    if feature not in X_test.columns:
+        print(f"{feature:30s} | Feature not found")
+        continue
+
+    idx = X_test.columns.get_loc(feature)
+    # Use failure-class SHAP values
+    corr, _ = spearmanr(X_test[feature], shap_values[:, idx, 1])
 
     status = "OK"
     if expected == "positive" and corr < 0:
@@ -37,28 +75,32 @@ for feature, expected in domain_expectations.items():
     if expected == "negative" and corr > 0:
         status = "Violates domain logic"
 
-    print(f"{feature:20s} | SHAP Corr: {corr: .3f} | {status}")
+    print(f"{feature:30s} | SHAP Corr: {corr: .3f} | {status}")
 
-# -------------------------------
-# Anomaly detection
-# -------------------------------
+# -------------------------------------------------
+# 6. Anomaly detection (root-cause analysis)
+# -------------------------------------------------
 anomalies = []
 
-for i in range(len(X)):
-    if X.iloc[i]["Temperature"] < X["Temperature"].median() and \
-       shap_values[i, X.columns.get_loc("Temperature")] > 0:
-        anomalies.append((i, "High risk at low temperature"))
+for i in range(len(X_test)):
+    row = X_test.iloc[i]
+    # Use failure-class SHAP values
+    shap_row = shap_values[i, :, 1]
 
-    if X.iloc[i]["Vibration"] < X["Vibration"].median() and \
-       shap_values[i, X.columns.get_loc("Vibration")] > 0:
-        anomalies.append((i, "High risk at low vibration"))
+    if row["Air temperature [K]"] < X_test["Air temperature [K]"].median() and \
+       shap_row[X_test.columns.get_loc("Air temperature [K]")] > 0:
+        anomalies.append((i, "High risk at low air temperature"))
 
-    if X.iloc[i]["Pressure_stability"] > X["Pressure_stability"].median() and \
-       shap_values[i, X.columns.get_loc("Pressure_stability")] > 0:
-        anomalies.append((i, "High risk despite stable pressure"))
+    if row["Torque [Nm]"] < X_test["Torque [Nm]"].median() and \
+       shap_row[X_test.columns.get_loc("Torque [Nm]")] > 0:
+        anomalies.append((i, "High risk at low torque"))
 
-anomaly_df = pd.DataFrame(anomalies, columns=["Row", "Issue"])
+    if row["Tool wear [min]"] < X_test["Tool wear [min]"].median() and \
+       shap_row[X_test.columns.get_loc("Tool wear [min]")] > 0:
+        anomalies.append((i, "High risk at low tool wear"))
+
+anomaly_df = pd.DataFrame(anomalies, columns=["Row_Index", "Issue"])
 
 print("\nANOMALIES REQUIRING ROOT-CAUSE ANALYSIS")
-print("-" * 40)
+print("-" * 55)
 print(anomaly_df if not anomaly_df.empty else "None detected")
