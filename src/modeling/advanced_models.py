@@ -69,8 +69,8 @@ print("F1:", f1_score(y_test, xgb_preds))
 
 # Save model
 os.makedirs("models", exist_ok=True)
-joblib.dump(xgb, "models/xgboost_model.joblib")
-joblib.dump(scaler, "models/scaler.joblib")
+joblib.dump(xgb, "src/modeling/models/xgboost_model.joblib")
+joblib.dump(scaler, "src/modeling/models/xgboost_scaler.joblib")
 
-print("\n✅ Advanced models trained and saved successfully.")
+print("\n Advanced models trained and saved successfully.")
 
