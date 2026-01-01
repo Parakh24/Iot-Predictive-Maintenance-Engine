@@ -39,7 +39,7 @@ def main():
     X_test = scaler.transform(X_test)
 
     # -------------------------------
-    # 1️⃣ Baseline with class weights
+    #  Baseline with class weights
     # -------------------------------
     weighted_model = LogisticRegression(
         max_iter=1000,
@@ -52,7 +52,7 @@ def main():
     f1_weighted = f1_score(y_test, y_pred_weighted)
 
     # -------------------------------
-    # 2️⃣ SMOTE-based model
+    #  SMOTE-based model
     # -------------------------------
     smote = SMOTE(random_state=42)
     X_smote, y_smote = smote.fit_resample(X_train, y_train)
@@ -76,8 +76,8 @@ def main():
     print(f"SMOTE - F1            : {f1_smote:.4f}")
 
     # Save best-performing model 
-    joblib.dump(smote_model, "src/models/imbalance_handled_model.joblib")
-    joblib.dump(scaler, "src/models/imbalance_scaler.joblib")
+    joblib.dump(smote_model, "src/modeling/models/imbalance_handled_model.joblib")
+    joblib.dump(scaler, "src/modeling/models/imbalance_scaler.joblib")
 
 if __name__ == "__main__":
     main()
