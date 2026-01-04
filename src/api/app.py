@@ -1,13 +1,24 @@
 from flask import Flask, request, jsonify
 import joblib
 from inference import predict_failure
-import shap 
+import shap
+import os
 
 app = Flask(__name__)
 
-# Load model artifacts ONCE at startup
-model = joblib.load("models/final_xgb_model.joblib")
-preprocessor = joblib.load("models/preprocessing_pipeline.joblib")
+# -------------------------------
+# Paths: load models from src/modeling/models/
+# -------------------------------
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# XGBoost model
+model_path = os.path.join(BASE_DIR, "../modeling/models/xgboost_pipeline.joblib")
+# Preprocessing pipeline (choose the correct pipeline)
+preprocessor_path = os.path.join(BASE_DIR, "../modeling/models/imbalancehandled_pipeline.joblib")
+
+# Load model artifacts ONCE at startup (latency optimization)
+model = joblib.load(model_path)
+preprocessor = joblib.load(preprocessor_path)
 
 # -------------------------------------------------
 # Health check
@@ -30,7 +41,8 @@ def predict():
             if field not in data:
                 return jsonify({"error": f"Missing field: {field}"}), 400
 
-        result = predict_failure(data, model, preprocessor)                            #before only data as arguments after, optimization model and preprocessor
+        # Call inference with model and preprocessor
+        result = predict_failure(data, model, preprocessor)
 
         prob = result["failure_probability"]
         risk = "HIGH" if prob > 0.7 else "MEDIUM" if prob > 0.4 else "LOW"
@@ -44,9 +56,9 @@ def predict():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-
+# -------------------------------------------------
+# Entry point
+# -------------------------------------------------
 if __name__ == "__main__":
-    app.run(debug=False)                           #before True but after optimization false is there 
-
-
-    #what i have done is big latency improvement work done 
+    # debug=False for latency / production
+    app.run(debug=False, host="0.0.0.0", port=5000)
