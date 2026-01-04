@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import joblib
 from inference import predict_failure
+import shap 
 
 app = Flask(__name__)
 
