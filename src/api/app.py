@@ -1,7 +1,12 @@
 from flask import Flask, request, jsonify
+import joblib
 from inference import predict_failure
 
 app = Flask(__name__)
+
+# Load model artifacts ONCE at startup
+model = joblib.load("models/final_xgb_model.joblib")
+preprocessor = joblib.load("models/preprocessing_pipeline.joblib")
 
 # -------------------------------------------------
 # Health check
@@ -24,7 +29,7 @@ def predict():
             if field not in data:
                 return jsonify({"error": f"Missing field: {field}"}), 400
 
-        result = predict_failure(data)
+        result = predict_failure(data, model, preprocessor)                            #before only data as arguments after, optimization model and preprocessor
 
         prob = result["failure_probability"]
         risk = "HIGH" if prob > 0.7 else "MEDIUM" if prob > 0.4 else "LOW"
@@ -40,4 +45,7 @@ def predict():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)                           #before True but after optimization false is there 
+
+
+    #what i have done is big latency improvement work done 
