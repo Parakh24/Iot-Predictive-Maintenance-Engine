@@ -1,0 +1,7 @@
+flask==3.0.0
+numpy>=1.27.0.dev0
+pandas --pre
+scikit-learn --pre
+xgboost --pre
+shap --pre
+joblib==1.4.2
