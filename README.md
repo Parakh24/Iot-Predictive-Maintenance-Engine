@@ -1,11 +1,11 @@
 
-# 📊 IoT Predictive Maintenance Engine
+#  IoT Predictive Maintenance Engine
 
 An **IoT-based Predictive Maintenance Engine** designed to analyze sensor data from connected devices and predict equipment failures before they occur. This project focuses on proactive maintenance using data-driven insights to reduce downtime and improve system reliability.
 
 ---
 
-## 📌 Table of Contents
+##  Table of Contents
 
 - [Overview](#overview)
 - [Features](#features)
@@ -21,7 +21,7 @@ An **IoT-based Predictive Maintenance Engine** designed to analyze sensor data f
 
 ---
 
-## 🧠 Overview
+##  Overview
 
 Predictive maintenance uses historical and real-time sensor data from IoT devices to predict when equipment is likely to fail. This project implements a predictive maintenance pipeline that includes data ingestion, preprocessing, model training, prediction, and explainability.
 
@@ -32,7 +32,7 @@ The system helps in:
 
 ---
 
-## ✨ Features
+##  Features
 
 - IoT sensor data ingestion  
 - Exploratory Data Analysis (EDA)  
@@ -49,7 +49,7 @@ The system helps in:
 
 ---
 
-## 🧰 Tech Stack
+##  Tech Stack
 
 - **Language:** Python  
 - **Libraries:**  
@@ -63,7 +63,7 @@ The system helps in:
 ---
 
 
-## 🗂 Project Structure
+##  Project Structure
 ```bash
 
 
@@ -105,7 +105,7 @@ iot_project/
 └── .gitignore
 ```
 
-## 🚀 Installation
+##  Installation
 ```bash 
 
 
