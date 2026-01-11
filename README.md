@@ -62,8 +62,10 @@ The system helps in:
 
 ---
 
-```bash
+
 ## 🗂 Project Structure
+```bash
+
 
 iot_project/ 
 │ 
@@ -103,9 +105,9 @@ iot_project/
 └── .gitignore
 ```
 
-
-```bash 
 ## 🚀 Installation
+```bash 
+
 
 1. Clone the repository:
 git clone https://github.com/Parakh24/Iot-Predictive-Maintenance-Engine.git
