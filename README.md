@@ -62,7 +62,9 @@ The system helps in:
 
 ---
 
-## Project Structure 
+```bash
+## 🗂 Project Structure
+
 iot_project/ 
 │ 
 ├── data/ 
@@ -99,7 +101,7 @@ iot_project/
 ├── requirements.txt 
 ├── README.md 
 └── .gitignore
-
+```
 
 
 ```bash 
@@ -116,5 +118,5 @@ pip install -r requirements.txt
 ```
 
 
-## 🗂 Project Structure
+
 
